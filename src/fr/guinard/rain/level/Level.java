@@ -4,27 +4,27 @@ import fr.guinard.rain.graphics.Screen;
 import fr.guinard.rain.level.tile.Tile;
 
 public class Level {
-
-	protected int width;
-	protected int heigth;
+	protected int width, heigth;
+	protected int[] tilesInt;
 	protected int[] tiles;
 
 	public Level(int width, int height) {
 		this.width = width;
 		this.heigth = height;
-		tiles = new int[width * height];
+		tilesInt = new int[width * height];
 		generateLevel();
 	}
 
 	public Level(String path) {
 		loadLevel(path);
+		generateLevel();
 	}
 
 	protected void generateLevel() {
 
 	}
 
-	private void loadLevel(String path) {
+	protected void loadLevel(String path) {
 
 	}
 
@@ -33,7 +33,6 @@ public class Level {
 	}
 
 	private void time() {
-
 	}
 
 	public void render(int xScroll, int yScroll, Screen screen) {
@@ -50,12 +49,19 @@ public class Level {
 		}
 	}
 
+	/** Grass = 0xff00FF00 Flower = 0xffFFFF00 Rock = 0xff7F7F00 */
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= heigth)
 			return Tile.voidTile;
 
-		if (tiles[x + y * width] == 0) {
+		if (tiles[x + y * width] == 0xff00FF00) {
 			return Tile.grass;
+		}
+		if (tiles[x + y * width] == 0xffFFFF00) {
+			return Tile.flower;
+		}
+		if (tiles[x + y * width] == 0xff7F7F00) {
+			return Tile.rock;
 		}
 		return Tile.voidTile;
 	}

@@ -14,7 +14,7 @@ import fr.guinard.rain.entity.mob.Player;
 import fr.guinard.rain.graphics.Screen;
 import fr.guinard.rain.input.Keyboard;
 import fr.guinard.rain.level.Level;
-import fr.guinard.rain.level.RandomLevel;
+import fr.guinard.rain.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -45,8 +45,8 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 
-		level = new RandomLevel(64, 64);
-		player = new Player(key);
+		level = new SpawnLevel("/textures/spawnlevel.png");
+		player = new Player(8 * 16, 5 * 16, key);
 
 		addKeyListener(key);
 	}
